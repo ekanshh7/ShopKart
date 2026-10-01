@@ -3,9 +3,11 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import router from './routes/default.router.js'
+import customersRoutes from './routes/customer.routes.js'
+import productRoutes from './routes/product.routes.js'
 
 dotenv.config()
-const url = process.env.URL 
+const url = process.env.URL || 'mongodb://127.0.0.1:27017/shoptkart'
 const port = process.env.PORT || 5000
 const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174']
 
@@ -24,17 +26,20 @@ app.use((req, res, next) => {
     next()
 })
 app.use('/api', router)
+app.use('/customers', customersRoutes)
+app.use('/products', productRoutes)
+app.use('/api/products', productRoutes)
 
 mongoose
 .connect(url)
-.then(()=>{
-console.log('connected to db');
+.then(() => {
+    console.log('connected to db')
 })
-.catch((err)=>{
+.catch((err) => {
     console.log(err)
 })
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`server started at port ${port}`)
 })
 

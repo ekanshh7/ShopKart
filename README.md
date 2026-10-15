@@ -147,7 +147,7 @@ cd ShopKart
    RAZORPAY_KEY_SECRET=your_razorpay_secret
    ```
 
-4. **Seed the database (Optional but recommended)**:
+4. **Seed the database **:
    Populate MongoDB with sample products (Headphones, Keyboards, Books, etc.):
    ```bash
    npm run seed
